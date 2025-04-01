@@ -1,3 +1,5 @@
+-- server.lua
+
 ESX = exports["es_extended"]:getSharedObject()
 
 local pcCheckLocations = {
@@ -24,7 +26,7 @@ RegisterCommand("pccheck", function(source, args, rawCommand)
     end
 
     local targetId = tonumber(args[1])
-    local locationKey = #args >= 2 and args[2] or "maze"
+    local locationKey = (#args >= 2 and args[2]) or "maze"
 
     if not targetId then
          TriggerClientEvent('chat:addMessage', source, { args = { "Ungültige Spieler-ID." } })
@@ -38,12 +40,14 @@ RegisterCommand("pccheck", function(source, args, rawCommand)
     end
 
     if pccheckActive[targetId] then
+         -- If already in PC-Check, return the player.
          TriggerClientEvent("myScript:returnPlayer", targetId)
          pccheckActive[targetId] = nil
-         print("PC‑Check beendet: Spieler " .. targetId .. " wird zurück teleportiert.")
+         print("PC-Check beendet: Spieler " .. targetId .. " wird zurück teleportiert.")
     else
+         -- Start PC-Check for the target.
          TriggerClientEvent("myScript:pcCheck", targetId, location)
          pccheckActive[targetId] = true
-         print("PC‑Check aktiviert: Spieler " .. targetId .. " wird zum '" .. locationKey .. "' teleportiert und eingefroren.")
+         print("PC-Check aktiviert: Spieler " .. targetId .. " wird zum '" .. locationKey .. "' teleportiert und eingefroren.")
     end
 end, false)
