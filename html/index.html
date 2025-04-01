@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Overlay with Extended Fade-Out</title>
   <style>
-    /* Standard-Resets */
     * {
       margin: 0;
       padding: 0;
@@ -16,10 +15,6 @@
       font-family: Arial, sans-serif;
       background: transparent !important;
     }
-    /* Overlay mit radialem Gradient:
-       - Gelber Bereich (rgba(255,230,0,0.7)) bis 20%
-       - Übergang zu dunklem Grau (rgba(30,30,30,0.85)) ab 50%
-    */
     .overlay {
       position: fixed;
       top: 0;
@@ -37,7 +32,6 @@
       transition: opacity 5s ease;
       display: none; /* Initially hidden */
     }
-    /* Großes, dezentes Warnsymbol als Hintergrund-Wasserzeichen */
     .background-symbol {
       position: absolute;
       top: 50%;
@@ -50,7 +44,6 @@
       opacity: 0.15;
       z-index: 1;
     }
-    /* Zentrale Inhalte des Overlays */
     .overlay-content {
       position: absolute;
       top: 50%;
@@ -60,7 +53,6 @@
       color: #fff;
       z-index: 2;
     }
-    /* Kleines Warnsymbol (gelb) im Vordergrund via CSS-Maske */
     .warning-icon {
       width: 50px;
       height: 50px;
@@ -71,14 +63,12 @@
       -webkit-mask-size: contain;
       mask-size: contain;
     }
-    /* Überschrift in zwei Zeilen, verkleinert */
     .overlay-content h1 {
       font-size: 18px;
       margin-bottom: 6px;
       text-transform: uppercase;
       line-height: 1.2;
     }
-    /* Untertext verkleinert */
     .overlay-content p {
       font-size: 14px;
     }
@@ -89,8 +79,8 @@
     <div class="background-symbol"></div>
     <div class="overlay-content">
       <div class="warning-icon"></div>
-      <h1>MITTEILUNG DES<br>SERVER TEAMS</h1>
-      <p>Einladung zum PC-Check</p>
+      <h1>NOTIFICATION FROM<br>SERVER TEAM</h1>
+      <p>Invite to PC-Check</p>
     </div>
   </div>
 
@@ -100,15 +90,12 @@
     window.addEventListener("message", function(event) {
       var overlay = document.getElementById("overlay");
       if (event.data.action === "open") {
-        // Vorherige Timer abbrechen
         if (fadeOutTimer !== null) {
           clearTimeout(fadeOutTimer);
           fadeOutTimer = null;
         }
-        // Overlay sofort anzeigen und volle Opazität setzen
         overlay.style.display = "block";
         overlay.style.opacity = "1";
-        // Nach 5 Sekunden langsam über 5 Sekunden ausblenden
         fadeOutTimer = setTimeout(function(){
           overlay.style.opacity = "0";
           setTimeout(function(){
