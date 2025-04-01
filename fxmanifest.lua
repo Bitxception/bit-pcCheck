@@ -3,7 +3,7 @@ game 'gta5'
 
 author 'Bitception'
 description 'Free PC-Check Script for ESX, inspired by Grand.'
-version '1.1.4'
+version '1.1.0'
 
 ui_page 'html/index.html'
 
